@@ -13,7 +13,7 @@ $(document).ready(function() {
         data: {
           format: 'json'
         },
-        success: function(response) {
+        success: function (response) {
           $('.showHumidity').text(`The humidity in ${city} is ${response.main.humidity}%`);
           $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp}.`);
           $.ajax({
@@ -23,10 +23,16 @@ $(document).ready(function() {
               format: 'json'
             },
             success: function(response) {
+              
               let latitude = response.results[0].geometry.location.lat;
               let longitude = response.results[0].geometry.location.lng;
+              console.log(longitude);
+              console.log(latitude);
+              document.getElementsByClassName("showHumidity")[0].setAttribute("data-lat", latitude);
+              document.getElementsByClassName("showHumidity")[0].setAttribute("data-long", longitude);
               // $('.showHumidity').text(`The humidity in ${city} is ${response.main.humidity}%`);
               // $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp}.`);
+              myMap();
             },
             error: function() {
               $('#errors').text("There was an error processing your request. Please try again.")
@@ -64,3 +70,16 @@ $(document).ready(function() {
   //     }
   //   });
   // });
+
+  // $("li").each(function(){
+  //   console.log($(this).data("lat"));
+  //   var citymarker = {lat: $(this).data("lat"), lng: $(this).data("lng")};
+  //   console.log(citymarker);
+  //   lastcity = citymarker;
+  //   var marker = new google.maps.Marker({
+  //   position: citymarker,
+  //   map: map
+  //          })
+   
+  //  })
+  //  map.panTo(lastcity);

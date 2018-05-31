@@ -8,15 +8,28 @@
 
 <script>
 function myMap() {
+
+ var lt = parseInt(document.getElementsByClassName("showHumidity")[0].getAttribute("data-lat"));
+ var lg = parseInt(document.getElementsByClassName("showHumidity")[0].getAttribute("data-long"));
+console.log(lt);
 var mapProp= {
-    center:new google.maps.LatLng(51.508742,-0.120850),
+    center:new google.maps.LatLng(lt, lg),
     zoom:5,
 };
 var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+console.log(lt);
+var marker = new google.maps.Marker({
+          position: {lat: lt, lng: lg},
+          map: map,
+          title: 'Hello World!'
+        });
+      
+
 }
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeMNCafUByho8MtYduzsNLHUjJLN0Xvgs&callback=myMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDeMNCafUByho8MtYduzsNLHUjJLN0Xvgs&callback=myMap"></script> 
+<!-- send mymap to js file here so can link  to the page -->
 
 <div class="container">
   <h1>Get Weather Conditions From Anywhere!</h1>
@@ -24,7 +37,7 @@ var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
   <input id="location" type="text">
   <button class="btn-success" id="weatherLocation">Get Current Humidity!</button>
   <div class="errors"></div>
-  <div class="showHumidity"></div>
+  <div class="showHumidity" data-lat="" data-long=""onclick="myMap()"></div>
   <div class="showTemp"></div>
 </div>
 
